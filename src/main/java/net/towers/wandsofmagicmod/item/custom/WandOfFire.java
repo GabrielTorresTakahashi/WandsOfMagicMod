@@ -19,7 +19,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import net.towers.wandsofmagicmod.entity.projectile.thrown.FireProjectileEntity;
-import net.towers.wandsofmagicmod.item.ModItems;
 
 public class WandOfFire extends Item implements Vanishable {
 
@@ -42,17 +41,18 @@ public class WandOfFire extends Item implements Vanishable {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        ItemStack projectileItem = ModItems.FIRE_PROJECTILE.getDefaultStack();
-        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_FIRECHARGE_USE,
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW,
                 SoundCategory.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
         if (!world.isClient) {
-            FireProjectileEntity fireProjectileEntity = new FireProjectileEntity(world, user);
-            fireProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 3.0f, 0.0f);
-            fireProjectileEntity.setItem(projectileItem);
-            world.spawnEntity(fireProjectileEntity);
+            FireProjectileEntity snowballEntity = new FireProjectileEntity(world, user);
+            snowballEntity.setItem(itemStack);
+            snowballEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 1.0f);
+            world.spawnEntity(snowballEntity);
         }
         user.incrementStat(Stats.USED.getOrCreateStat(this));
-
+        if (!user.getAbilities().creativeMode) {
+            itemStack.decrement(1);
+        }
         return TypedActionResult.success(itemStack, world.isClient());
     }
 
