@@ -21,6 +21,11 @@ public class ModItems {
             new Item(new Item.Settings()),
             ItemGroups.COMBAT);
 
+    public static final Item FIRE_PROJECTILE = registerItem(
+            "fire_projectile",
+            new Item(new Item.Settings()),
+            ItemGroups.COMBAT);
+
     public static void registerModItems() {
         WandsOfMagicMod.LOGGER.debug("Registering Mod Items for " + WandsOfMagicMod.MOD_ID);
     }
