@@ -1,4 +1,8 @@
 {
     "item.wandsofmagicmod.fire_wand" : "Fire Wand",
-    "item.wandsofmagicmod.fire_projectile" : "Fire Projectile"
+    "item.wandsofmagicmod.fire_projectile" : "Fire Projectile",
+    "item.wandsofmagicmod.firestone" : "Firestone",
+
+    "block.wandsofmagicmod.firestone_ore" : "Firestone Ore",
+    "block.wandsofmagicmod.deepslate_firestone_ore" : "Deepslate Firestone Ore"
 }

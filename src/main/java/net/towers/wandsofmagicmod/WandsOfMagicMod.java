@@ -1,6 +1,7 @@
 package net.towers.wandsofmagicmod;
 
 import net.fabricmc.api.ModInitializer;
+import net.towers.wandsofmagicmod.block.ModBlocks;
 import net.towers.wandsofmagicmod.item.ModItems;
 
 import org.slf4j.Logger;
@@ -16,5 +17,6 @@ public class WandsOfMagicMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModItems.registerModItems();
+		ModBlocks.registerModBlocks();
 	}
 }
