@@ -19,7 +19,7 @@ public class ModBlocks {
 
     public static final Block FIRESTONE_ORE = registerBlock(
             "firestone_ore",
-            new ExperienceDroppingBlock(FabricBlockSettings.of(Material.STONE).strength(4f).requiresTool()),
+            new ExperienceDroppingBlock(FabricBlockSettings.of(Material.STONE).strength(3f).requiresTool()),
             ModItemGroup.WANDS_OF_MAGIC_GROUP);
 
     public static final Block DEEPSLATE_FIRESTONE_ORE = registerBlock(

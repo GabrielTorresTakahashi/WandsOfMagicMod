@@ -16,7 +16,9 @@ public class WandsOfMagicMod implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
+
 	}
 }

@@ -1,5 +1,6 @@
 {
-    "item.wandsofmagicmod.fire_wand" : "Fire Wand",
+    "itemGroup.minecraft.wandsofmagicmod" : "Wands of Magic",
+    "item.wandsofmagicmod.wand_of_fire" : "Wand of Fire",
     "item.wandsofmagicmod.fire_projectile" : "Fire Projectile",
     "item.wandsofmagicmod.firestone" : "Firestone",
 

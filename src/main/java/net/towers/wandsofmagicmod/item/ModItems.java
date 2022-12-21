@@ -15,8 +15,8 @@ public class ModItems {
         return Registry.register(Registries.ITEM, new Identifier(WandsOfMagicMod.MOD_ID, name), item);
     }
 
-    public static final Item FIRE_WAND = registerItem(
-            "fire_wand",
+    public static final Item WAND_OF_FIRE = registerItem(
+            "wand_of_fire",
             new Item(new Item.Settings()),
             ModItemGroup.WANDS_OF_MAGIC_GROUP);
 
