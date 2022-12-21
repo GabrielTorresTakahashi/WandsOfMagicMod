@@ -7,6 +7,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.towers.wandsofmagicmod.WandsOfMagicMod;
+import net.towers.wandsofmagicmod.item.custom.WandOfFire;
 
 public class ModItems {
 
@@ -17,7 +18,7 @@ public class ModItems {
 
     public static final Item WAND_OF_FIRE = registerItem(
             "wand_of_fire",
-            new Item(new Item.Settings()),
+            new WandOfFire(new Item.Settings().maxCount(1).fireproof().maxDamage(2), 3, -2f),
             ModItemGroup.WANDS_OF_MAGIC_GROUP);
 
     public static final Item FIRE_PROJECTILE = registerItem(
