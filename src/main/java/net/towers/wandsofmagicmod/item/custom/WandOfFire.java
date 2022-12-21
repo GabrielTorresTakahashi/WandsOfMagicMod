@@ -8,8 +8,18 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Vanishable;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
+import net.minecraft.util.Hand;
+import net.minecraft.util.TypedActionResult;
+import net.minecraft.world.World;
+import net.towers.wandsofmagicmod.entity.projectile.thrown.FireProjectileEntity;
+import net.towers.wandsofmagicmod.item.ModItems;
 
 public class WandOfFire extends Item implements Vanishable {
 
@@ -27,7 +37,23 @@ public class WandOfFire extends Item implements Vanishable {
                 "Weapon modifier", (double) attackSpeed, EntityAttributeModifier.Operation.ADDITION));
 
         this.attributeModifiers = builder.build();
+    }
 
+    @Override
+    public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
+        ItemStack itemStack = user.getStackInHand(hand);
+        ItemStack projectileItem = ModItems.FIRE_PROJECTILE.getDefaultStack();
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_FIRECHARGE_USE,
+                SoundCategory.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
+        if (!world.isClient) {
+            FireProjectileEntity fireProjectileEntity = new FireProjectileEntity(world, user);
+            fireProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 3.0f, 0.0f);
+            fireProjectileEntity.setItem(projectileItem);
+            world.spawnEntity(fireProjectileEntity);
+        }
+        user.incrementStat(Stats.USED.getOrCreateStat(this));
+
+        return TypedActionResult.success(itemStack, world.isClient());
     }
 
     @Override
