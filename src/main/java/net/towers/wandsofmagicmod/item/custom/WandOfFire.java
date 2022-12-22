@@ -19,6 +19,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.world.World;
 import net.towers.wandsofmagicmod.entity.projectile.thrown.FireProjectileEntity;
+import net.towers.wandsofmagicmod.item.ModItems;
 
 public class WandOfFire extends Item implements Vanishable {
 
@@ -27,14 +28,13 @@ public class WandOfFire extends Item implements Vanishable {
 
     public WandOfFire(Settings settings, int attackDamage, float attackSpeed) {
         super(settings);
+
         this.attackDamage = (float) attackDamage;
         Builder<EntityAttribute, EntityAttributeModifier> builder = ImmutableMultimap.builder();
-
         builder.put(EntityAttributes.GENERIC_ATTACK_DAMAGE, new EntityAttributeModifier(ATTACK_DAMAGE_MODIFIER_ID,
                 "Weapon modifier", (double) this.attackDamage, EntityAttributeModifier.Operation.ADDITION));
         builder.put(EntityAttributes.GENERIC_ATTACK_SPEED, new EntityAttributeModifier(ATTACK_SPEED_MODIFIER_ID,
                 "Weapon modifier", (double) attackSpeed, EntityAttributeModifier.Operation.ADDITION));
-
         this.attributeModifiers = builder.build();
     }
 
@@ -44,10 +44,10 @@ public class WandOfFire extends Item implements Vanishable {
         world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW,
                 SoundCategory.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
         if (!world.isClient) {
-            FireProjectileEntity snowballEntity = new FireProjectileEntity(world, user);
-            snowballEntity.setItem(itemStack);
-            snowballEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 1.0f);
-            world.spawnEntity(snowballEntity);
+            FireProjectileEntity fireProjectileEntity = new FireProjectileEntity(world, user);
+            fireProjectileEntity.setItem(ModItems.FIRE_PROJECTILE.getDefaultStack());
+            fireProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 1.0f);
+            world.spawnEntity(fireProjectileEntity);
         }
         user.incrementStat(Stats.USED.getOrCreateStat(this));
         if (!user.getAbilities().creativeMode) {
