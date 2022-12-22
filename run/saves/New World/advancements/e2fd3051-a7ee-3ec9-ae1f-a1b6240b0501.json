@@ -1,9 +1,0 @@
-{
-  "minecraft:adventure/adventuring_time": {
-    "criteria": {
-      "minecraft:eroded_badlands": "2022-12-21 08:41:51 -0300"
-    },
-    "done": false
-  },
-  "DataVersion": 3218
-}
