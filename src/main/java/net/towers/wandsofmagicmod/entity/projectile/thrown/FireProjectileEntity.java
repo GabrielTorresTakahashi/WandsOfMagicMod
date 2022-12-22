@@ -18,12 +18,16 @@ import net.towers.wandsofmagicmod.entity.ModEntityTypes;
 import net.towers.wandsofmagicmod.item.ModItems;
 
 public class FireProjectileEntity extends ThrownItemEntity {
+    boolean explosion;
+
     public FireProjectileEntity(EntityType<? extends FireProjectileEntity> entityType, World world) {
         super(entityType, world);
     }
 
     public FireProjectileEntity(World world, LivingEntity owner) {
         super(ModEntityTypes.FIRE_PROJECTILE_ENTITY_TYPE, owner, world);
+        final boolean explosion = getOwner().isSneaking();
+        this.explosion = explosion;
     }
 
     public FireProjectileEntity(World world, double x, double y, double z) {
@@ -50,8 +54,10 @@ public class FireProjectileEntity extends ThrownItemEntity {
         super.onCollision(hitResult);
         if (!this.world.isClient) {
             this.world.sendEntityStatus(this, EntityStatuses.PLAY_DEATH_SOUND_OR_ADD_PROJECTILE_HIT_PARTICLES);
-            this.world.createExplosion((Entity) this, this.getX(), this.getY(), this.getZ(),
-                    (float) explosionPower, true, World.ExplosionSourceType.MOB);
+            if (explosion) {
+                this.world.createExplosion((Entity) this, this.getX(), this.getY(), this.getZ(),
+                        (float) explosionPower, true, World.ExplosionSourceType.MOB);
+            }
             this.discard();
         }
     }
