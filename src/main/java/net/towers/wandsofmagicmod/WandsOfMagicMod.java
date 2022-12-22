@@ -19,13 +19,7 @@ public class WandsOfMagicMod implements ModInitializer {
 	public static final String MOD_ID = "wandsofmagicmod";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	public static final EntityType<FireProjectileEntity> FIRE_PROJECTILE_ENTITY_TYPE = Registry.register(
-			Registries.ENTITY_TYPE,
-			new Identifier(MOD_ID, "fire_projectile"),
-			FabricEntityTypeBuilder.<FireProjectileEntity>create(SpawnGroup.MISC, FireProjectileEntity::new)
-					.dimensions(EntityDimensions.fixed(1, 1))
-					.trackRangeBlocks(4).trackedUpdateRate(10)
-					.build());
+	
 
 	@Override
 	public void onInitialize() {
