@@ -41,7 +41,7 @@ public class WandOfFire extends Item implements Vanishable {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
-        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ENTITY_SNOWBALL_THROW,
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.ITEM_FIRECHARGE_USE,
                 SoundCategory.NEUTRAL, 0.5f, 0.4f / (world.getRandom().nextFloat() * 0.4f + 0.8f));
         if (!world.isClient) {
             FireProjectileEntity fireProjectileEntity = new FireProjectileEntity(world, user);
@@ -49,10 +49,8 @@ public class WandOfFire extends Item implements Vanishable {
             fireProjectileEntity.setVelocity(user, user.getPitch(), user.getYaw(), 0.0f, 1.5f, 1.0f);
             world.spawnEntity(fireProjectileEntity);
         }
+        user.getItemCooldownManager().set(this, 15);
         user.incrementStat(Stats.USED.getOrCreateStat(this));
-        if (!user.getAbilities().creativeMode) {
-            itemStack.decrement(1);
-        }
         return TypedActionResult.success(itemStack, world.isClient());
     }
 
