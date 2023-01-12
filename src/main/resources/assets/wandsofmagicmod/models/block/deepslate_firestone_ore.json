@@ -1,6 +1,0 @@
-{
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "wandsofmagicmod:block/deepslate_firestone_ore"
-    }
-}
