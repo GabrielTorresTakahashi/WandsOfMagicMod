@@ -8,6 +8,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.towers.wandsofmagicmod.WandsOfMagicMod;
 import net.towers.wandsofmagicmod.item.custom.WandOfFire;
+import net.towers.wandsofmagicmod.item.custom.WandOfThunder;
 
 public class ModItems {
 
@@ -29,6 +30,11 @@ public class ModItems {
     public static final Item FIRESTONE = registerItem(
             "firestone",
             new Item(new Item.Settings()),
+            ModItemGroup.WANDS_OF_MAGIC_GROUP);
+
+    public static final Item WAND_OF_THUNDER = registerItem(
+            "wand_of_thunder",
+            new WandOfThunder(new Item.Settings().maxCount(1).maxDamage(2), 3, -2f),
             ModItemGroup.WANDS_OF_MAGIC_GROUP);
 
     public static void registerModItems() {
